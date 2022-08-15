@@ -1,0 +1,27 @@
+{
+  "name": "raid-roles",
+  "description": "Roles for raid threads",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "dependencies": {
+    "@discordjs/rest": "^1.0.1",
+    "better-sqlite-pool": "^0.3.1",
+    "better-sqlite3": "^7.6.2",
+    "discord.js": "^14.2.0",
+    "enmap": "^5.9.0",
+    "winston": "^3.8.1"
+  },
+  "scripts": {
+    "bot:start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuentinMcCarthy/raid-roles-bot.git"
+  },
+  "author": "Quentin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuentinMcCarthy/raid-roles-bot/issues"
+  },
+  "homepage": "https://github.com/QuentinMcCarthy/raid-roles-bot#readme"
+}
