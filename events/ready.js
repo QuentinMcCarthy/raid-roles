@@ -4,7 +4,7 @@ module.exports = {
     execute(client) {
         // Default guild settings
         const defaultSettings = {
-            channels: {}
+            threads: {}
         }
 
         let todayDate = new Date();
