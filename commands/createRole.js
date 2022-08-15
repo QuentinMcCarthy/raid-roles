@@ -9,11 +9,7 @@ module.exports = {
                 .setDescription('The name of the role to create, if left blank the role will have the same name as the thread'))
 		.setDefaultMemberPermissions(PermissionFlagsBits.MANAGE_ROLES),
     async execute(interaction) {
-        await interaction.deferReply({ ephemeral: true });
-
         if (interaction.channel.isThread()) {
-            client.settings.set(interaction.guildId, interaction.channelId, 'threads');
-
             let roleName = interaction.channel.name;
 
             if (interaction.options.getString('role')){
@@ -25,10 +21,14 @@ module.exports = {
                 mentionable: true,
                 reason: 'Thread role management'
             })
-                .then(logger.log)
+                .then((role) => {
+                    client.settings.set(interaction.guildId, role.id, `threads.${interaction.channelId}.role`)
+
+                    logger.log('info', `Role ${role.id} created for thread ${interaction.channel.name} at ${interaction.user.tag}'s request`)
+                })
                 .catch(logger.error);
 
-            await interaction.editReply(`Now managing role '${roleName}' for thread ${interaction.channel.name}`);
+            await interaction.reply(`Now managing role '${client.settings.get(interaction.guildId, `threads.${interaction.channelId}.role`)}' for thread ${interaction.channel.name}`);
         } else {
             await interaction.reply({ content: 'This channel is not a thread!', ephemeral: true });
         }
