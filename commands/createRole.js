@@ -11,6 +11,7 @@ module.exports = {
     async execute(interaction) {
         if (interaction.channel.isThread()) {
             let roleName = interaction.channel.name;
+            let roleId = 0;
 
             if (interaction.options.getString('role')){
                 roleName = interaction.options.getString('role');
@@ -22,13 +23,15 @@ module.exports = {
                 reason: 'Thread role management'
             })
                 .then((role) => {
-                    client.settings.set(interaction.guildId, role.id, `threads.${interaction.channelId}.role`)
+                    roleId = role.id;
 
-                    logger.log('info', `Role ${role.id} created for thread ${interaction.channel.name} at ${interaction.user.tag}'s request`)
+                    client.settings.set(interaction.guildId, roleId, `threads.${interaction.channelId}.role`)
+
+                    logger.log('info', `Role ${roleId} created for thread ${interaction.channel.name} at ${interaction.user.tag}'s request`)
                 })
-                .catch(logger.error);
+                .catch((err) => logger.log('error', err));
 
-            await interaction.reply(`Now managing role '${client.settings.get(interaction.guildId, `threads.${interaction.channelId}.role`)}' for thread ${interaction.channel.name}`);
+            await interaction.reply({ content: `Now managing role ${roleName} (${roleId}) for thread ${interaction.channel.name}`, ephemeral: true });
         } else {
             await interaction.reply({ content: 'This channel is not a thread!', ephemeral: true });
         }

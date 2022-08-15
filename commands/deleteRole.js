@@ -11,7 +11,7 @@ module.exports = {
 
             interaction.guild.roles.delete('', 'No longer managing role')
                 .then(() => logger.log('info', `Deleted role ID:${toDelete} at ${interaction.user.tag}'s request`))
-                .catch(logger.error);
+                .catch((err) => logger.log('error', err));
 
             client.settings.set(interaction.guildId, 0, `threads.${interaction.channelId}.role`);
 
