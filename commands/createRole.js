@@ -1,8 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('createRole')
+        .setName('createrole')
         .setDescription('Marks the channel for thread role tracking')
         .addStringOption(option =>
             option.setName('role')

@@ -1,8 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('deleteRole')
+        .setName('deleterole')
         .setDescription('Deletes the role being managed for this thread')
         .setDefaultMemberPermissions(PermissionFlagsBits.MANAGE_ROLES),
     async execute(interaction) {

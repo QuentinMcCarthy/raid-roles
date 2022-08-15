@@ -1,3 +1,14 @@
+const winston = require('winston');
+
+// Logging
+const logger = winston.createLogger({
+    transports: [
+        new winston.transports.Console(),
+        new winston.transports.File({ filename: '../log.log' }),
+    ],
+    format: winston.format.printf(log => '[' + log.level.toUpperCase() + '] - ' + log.message),
+});
+
 module.exports = {
     name: 'ready',
     once: true,
